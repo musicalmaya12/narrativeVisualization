@@ -37,7 +37,8 @@ h1 {text-align: center;}
   Which country has the most bang for your buck - the cheapest wines with the highest quality?</br>
   Which country has the most refined wines - the most expensive wines with the highest quality?</br>
   And which country has the worst wines - the cheapest wines with the lowest quality?</br>
-  Click through this slideshow to find out! 
+  First, below is a scatterplot showing the relationship between price and quality rating for all three countries combined.</br>
+  Click through this slideshow to find out which country wins each category listed above!</br>
   </p>
 
   <div id="main-viz"></div>
@@ -82,15 +83,6 @@ var svg = d3.select("#main-viz")
     .range([ height, 0]);
   svg.append("g")
     .call(d3.axisLeft(y));
-  
-  svg.append("text")
-        .attr("x", (width / 2))             
-        .attr("y", 0 - (margin.top / 2))
-        .attr("text-anchor", "middle")  
-        .style("font-size", "16px") 
-        .style("text-decoration", "underline")  
-        .text("Italy")
-        .style("font-family", "Arial");
   
   svg.append("text")
     .attr("transform", "translate(" + (width / 2) + " ," + (height + (margin.bottom - 2)) + ")")  
