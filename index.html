@@ -98,12 +98,12 @@ var svg = d3.select("#my_dataviz")
     .append("circle")
       .attr("cx", function (d) {
         if (d.country==="Italy") {
-          return x(d.price); 
+          return d.price; 
         }
       })
       .attr("cy", function (d) { 
         if (d.country==="Italy") {
-          return y(d.points); 
+          return d.points; 
         }
       })
       .attr("r", 1.5)
