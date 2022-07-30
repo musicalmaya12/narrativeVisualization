@@ -6,6 +6,7 @@
   display: inline-block;
   display: flex;
   justify-content: center;
+  margin: 20;
 }
 
 .pagination a {
@@ -79,7 +80,7 @@ var svg = d3.select("#my_dataviz")
     .call(d3.axisLeft(y));
   
   svg.append("text")
-    .attr("transform", "translate(" + (width / 2) + " ," + (height + 25) + ")")  
+    .attr("transform", "translate(" + (width / 2) + " ," + (height + margin.bottom) + ")")  
     .style("text-anchor", "middle")
     .text("Price ($)");
 
