@@ -97,7 +97,7 @@ var svg = d3.select("#theus")
     .enter()
     .append("circle")
       .attr("cx", function (d) {
-        if (d.country==="The United States") {
+        if (d.country==="United States") {
           return x(d.price); 
         }
       })
