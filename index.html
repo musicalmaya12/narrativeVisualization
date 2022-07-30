@@ -34,10 +34,11 @@ h1 {text-align: center;}
 <div align="center">
   <h1>Wines Around The World:</h1>
   <p>What is the relationship between price and quality rating of wines in the United States, France, and Italy?</br>
-  Esteemed wine connoisseurs have ranked wines from the United States, France, and Italy for WineEnthusiast Magazine, on a scale of 0 to 100.</br>
-  Below is a scatterplot showing the relationship between price and quality rating for all three countries combined.</br>
-  We will answer three questions from our data...</br>
-  Click through this slideshow to find out which country wins each category listed above!
+  Which country has the most bang for your buck - the cheapest wines with the highest quality?</br>
+  Which country has the most refined wines - the most expensive wines with the highest quality?</br>
+  And which country has the worst wines - the cheapest wines with the lowest quality?</br>
+  First, below is a scatterplot showing the relationship between price and quality rating for all three countries combined.</br>
+  Click through this slideshow to find out which country wins each category listed above!</br>
   </p>
 
   <div id="main-viz"></div>
@@ -55,7 +56,7 @@ h1 {text-align: center;}
 <script src="https://d3js.org/d3.v4.min.js"></script>
 <script>
 
-d3.csv("wine-data.csv", d3.autoType()
+d3.csv("wine-data.csv", 
    function(data) {
   
 var margin = {top: 10, right: 30, bottom: 40, left: 60},
@@ -104,7 +105,7 @@ var svg = d3.select("#main-viz")
     .enter()
     .append("circle")
       .attr("cx", function (d) {
-        if (d.price!==0) {
+        if (d.price!=="0") {
           return x(d.price); 
         }
       })
