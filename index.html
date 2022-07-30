@@ -70,12 +70,22 @@ var svg = d3.select("#my_dataviz")
     .range([ 0, width ]);
   svg.append("g")
     .attr("transform", "translate(0," + height + ")")
+    .append('text')
+          .attr('class', 'axis-label')
+          .attr('x', innerWidth / 2)
+          .attr('y', 100)
+          .text('Price');
     .call(d3.axisBottom(x));
 
   var y = d3.scaleLinear()
     .domain([70, 100])
     .range([ height, 0]);
   svg.append("g")
+      .append('text')
+          .attr('class', 'axis-label')
+          .attr('x', innerWidth / 2)
+          .attr('y', 100)
+          .text('Ranking in Points');
     .call(d3.axisLeft(y));
 
   svg.append('g')
