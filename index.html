@@ -2,6 +2,10 @@
 <html>
 <head>
 <style>
+  
+body {
+  font-family: "Arial", sans-serif;
+}
 .pagination {
   display: inline-block;
   display: flex;
@@ -36,7 +40,7 @@ h1 {text-align: center;}
   Click through this slideshow to find out! 
   </p>
 
-  <div id="my_dataviz"></div>
+  <div id="italy"></div>
   <div class="pagination">
     <a href="#">&laquo;</a>
     <a class="active" href="index.html">1</a>
@@ -58,7 +62,7 @@ var margin = {top: 10, right: 30, bottom: 40, left: 60},
     width = 460 - margin.left - margin.right,
     height = 400 - margin.top - margin.bottom;
 
-var svg = d3.select("#my_dataviz")
+var svg = d3.select("#italy")
   .append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
@@ -85,12 +89,14 @@ var svg = d3.select("#my_dataviz")
         .attr("text-anchor", "middle")  
         .style("font-size", "16px") 
         .style("text-decoration", "underline")  
-        .text("Italy");
+        .text("Italy")
+        .style("font-family", "Arial");
   
   svg.append("text")
     .attr("transform", "translate(" + (width / 2) + " ," + (height + (margin.bottom - 2)) + ")")  
     .style("text-anchor", "middle")
-    .text("Price ($)");
+    .text("Price ($)")
+    .style("font-family", "Arial");
 
   svg.append("text")
     .attr("transform", "rotate(-90)")
@@ -98,7 +104,8 @@ var svg = d3.select("#my_dataviz")
     .attr("x", 0 - (height / 2))
     .attr("dy", "1em")
     .style("text-anchor", "middle")
-    .text("Ranking (Points)"); 
+    .text("Ranking (Points)")
+    .style("font-family", "Arial");
 
   svg.append('g')
     .selectAll("dot")
@@ -106,7 +113,7 @@ var svg = d3.select("#my_dataviz")
     .enter()
     .append("circle")
       .attr("cx", function (d) {
-        if (d.country==="Italy") {
+        if (d.country==="Italy" && d.price!=="0") {
           return x(d.price); 
         }
       })
