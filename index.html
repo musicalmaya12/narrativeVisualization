@@ -40,7 +40,7 @@ h1 {text-align: center;}
   Click through this slideshow to find out! 
   </p>
 
-  <div id="italy"></div>
+  <div id="main-viz"></div>
   <div class="pagination">
     <a href="#">&laquo;</a>
     <a class="active" href="index.html">1</a>
@@ -62,7 +62,7 @@ var margin = {top: 10, right: 30, bottom: 40, left: 60},
     width = 460 - margin.left - margin.right,
     height = 400 - margin.top - margin.bottom;
 
-var svg = d3.select("#italy")
+var svg = d3.select("#main-viz")
   .append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
@@ -113,14 +113,12 @@ var svg = d3.select("#italy")
     .enter()
     .append("circle")
       .attr("cx", function (d) {
-        if (d.country==="Italy" && d.price!=="0") {
+        if (d.price!=="0") {
           return x(d.price); 
         }
       })
-      .attr("cy", function (d) { 
-        if (d.country==="Italy") {
+      .attr("cy", function (d) {
           return y(d.points); 
-        }
       })
       .attr("r", 3)
       .style("fill", "#69b3a2")
