@@ -66,14 +66,14 @@ var svg = d3.select("#my_dataviz")
           "translate(" + margin.left + "," + margin.top + ")");
 
   var x = d3.scaleLinear()
-    .domain([0, 1000])
+    .domain([0, 250])
     .range([ 0, width ]);
   svg.append("g")
     .attr("transform", "translate(0," + height + ")")
     .call(d3.axisBottom(x));
 
   var y = d3.scaleLinear()
-    .domain([70, 250])
+    .domain([70, 100])
     .range([ height, 0]);
   svg.append("g")
     .call(d3.axisLeft(y));
