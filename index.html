@@ -1,164 +1,165 @@
 <!DOCTYPE html>
-<html>
-<head>
-<style>
+  <html>
+    <head>
+      <style>
   
-body {
-  font-family: "Arial", sans-serif;
-}
-.pagination {
-  display: inline-block;
-  display: flex;
-  justify-content: center;
-  padding: 20px;
-}
+        body {
+          font-family: "Arial", sans-serif;
+        }
+        .pagination {
+          display: inline-block;
+          display: flex;
+          justify-content: center;
+          padding: 20px;
+        }
 
-.pagination a {
-  color: black;
-  float: left;
-  padding: 8px 16px;
-  text-decoration: none;
-  text-align: center;
-}
+        .pagination a {
+          color: black;
+          float: left;
+          padding: 8px 16px;
+          text-decoration: none;
+          text-align: center;
+        }
 
-.pagination a.active {
-  background-color: red;
-  color: white;
-}
+        .pagination a.active {
+          background-color: red;
+          color: white;
+        }
   
-h1 {text-align: center;}
-</style>
-</head>
-<body>
+        h1 {text-align: center;}
+      </style>
+    </head>
 
-<div align="center">
-  <h1>Wines Around The World</h1>
-  <p>Esteemed wine connoisseurs have ranked fine wines from the United States, France, and Italy for WineEnthusiast Magazine, on a scale up to 100.</br>
-  Below is a scatterplot showing the relationship between price and quality rating for all three countries combined.</br>
-  Let's take a deeper dive into the data and see how wine varieties from the individual countries fare on the price-to-rating scale.</br>
-  Click through the tabs of this slideshow to see the relationship between price and points per country!</br>
-  </p>
+    <body>
 
-  <div id="main-viz"></div>
-  <div class="pagination">
-    <a href="#">&laquo;</a>
-    <a class="active" href="index.html">Introduction</a>
-    <a href="italy.html">Italy</a>
-    <a href="france.html">France</a>
-    <a href="unitedstates.html">The United States</a>
-    <a href="conclusion.html">Conclusion</a>
-    <a href="italy.html">&raquo;</a>
-  </div>
-</div>
+      <div align="center">
+        <h1>Wines Around The World</h1>
+          <p>Esteemed wine connoisseurs have ranked fine wines from the United States, France, and Italy for WineEnthusiast Magazine, on a scale up to 100.</br>
+            Below is a scatterplot showing the relationship between price and quality rating for all three countries combined.</br>
+            Let's take a deeper dive into the data and see how wine varieties from the individual countries fare on the price-to-rating scale.</br>
+            Click through the tabs of this slideshow to see the relationship between price and points per country!</br>
+          </p>
 
-<script src="https://d3js.org/d3.v4.min.js"></script>
-<script src="https://rawgit.com/susielu/d3-annotation/master/d3-annotation.min.js"></script>
-<script>
+        <div id="main-viz"></div>
+        <div class="pagination">
+          <a href="#">&laquo;</a>
+          <a class="active" href="index.html">Introduction</a>
+          <a href="italy.html">Italy</a>
+          <a href="france.html">France</a>
+          <a href="unitedstates.html">The United States</a>
+          <a href="conclusion.html">Conclusion</a>
+          <a href="italy.html">&raquo;</a>
+        </div>
+      </div>
 
-  d3.csv("wine-magazine-data.csv", 
-     function(data) {
+      <script src="https://d3js.org/d3.v4.min.js"></script>
+      <script src="https://rawgit.com/susielu/d3-annotation/master/d3-annotation.min.js"></script>
+      <script>
+
+        d3.csv("wine-magazine-data.csv", 
+          function(data) {
   
-  var margin = {top: 10, right: 30, bottom: 40, left: 60},
-    width = 460 - margin.left - margin.right,
-    height = 400 - margin.top - margin.bottom;
+        var margin = {top: 10, right: 30, bottom: 40, left: 60},
+          width = 460 - margin.left - margin.right,
+          height = 400 - margin.top - margin.bottom;
 
-  var svg = d3.select("#main-viz")
-  .append("svg")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
-  .append("g")
-    .attr("transform",
-          "translate(" + margin.left + "," + margin.top + ")");
+        var svg = d3.select("#main-viz")
+          .append("svg")
+            .attr("width", width + margin.left + margin.right)
+            .attr("height", height + margin.top + margin.bottom)
+          .append("g")
+            .attr("transform",
+              "translate(" + margin.left + "," + margin.top + ")");
 
-  var x = d3.scaleLinear()
-    .domain([0, 250])
-    .range([ 0, width ]);
-  svg.append("g")
-    .attr("transform", "translate(0," + height + ")")
-    .call(d3.axisBottom(x));
+        var x = d3.scaleLinear()
+          .domain([0, 250])
+          .range([ 0, width ]);
+          svg.append("g")
+            .attr("transform", "translate(0," + height + ")")
+            .call(d3.axisBottom(x));
 
-  var y = d3.scaleLinear()
-    .domain([80, 100])
-    .range([ height, 0]);
-  svg.append("g")
-    .call(d3.axisLeft(y));
+       var y = d3.scaleLinear()
+        .domain([80, 100])
+        .range([ height, 0]);
+        svg.append("g")
+          .call(d3.axisLeft(y));
     
-   const annotations = [
-   {
-    note: {
-    label: "Variety: Nebbiolo, Country: Italy",
-    title: "Highest ranked wine overall",
-    wrap: 150,
-    align: "right"
-   },
-    connector: {
-      end: "arrow"
-    },
-    color: ["red"],
-    x: x(150),
-    y: y(97),
-    dy: x(150),
-    dx: y(98)
-   },
-  {
-    note: {
-    label: "Variety: Cabernet Sauvignon, Country: United States",
-    title: "Most expensive wine overall",
-    wrap: 150,
-    align: "right"
-   },
-    connector: {
-      end: "arrow"
-    },
-    color: ["red"],
-    x: x(200),
-    y: y(95),
-    dy: 220,
-    dx: 80
-   }
- ]
+      const annotations = [
+        {
+          note: {
+            label: "Variety: Nebbiolo, Country: Italy",
+            title: "Highest ranked wine overall",
+            wrap: 150,
+            align: "right"
+          },
+          connector: {
+            end: "arrow"
+          },
+          color: ["red"],
+          x: x(150),
+          y: y(97),
+          dy: x(150),
+          dx: y(98)
+       },
+       {
+          note: {
+            label: "Variety: Cabernet Sauvignon, Country: United States",
+            title: "Most expensive wine overall",
+            wrap: 150,
+            align: "right"
+          },
+          connector: {
+            end: "arrow"
+          },
+          color: ["red"],
+          x: x(200),
+          y: y(95),
+          dy: 220,
+          dx: 80
+      }
+    ]
 
- const makeAnnotations = d3.annotation().type(d3.annotationLabel).annotations(annotations)
+    const makeAnnotations = d3.annotation().type(d3.annotationLabel).annotations(annotations)
   
-  svg.append("text")
-    .attr("transform", "translate(" + (width / 2) + " ," + (height + (margin.bottom - 2)) + ")")  
-    .style("text-anchor", "middle")
-    .text("Price ($)")
-    .style("font-family", "Arial");
+    svg.append("text")
+      .attr("transform", "translate(" + (width / 2) + " ," + (height + (margin.bottom - 2)) + ")")  
+      .style("text-anchor", "middle")
+      .text("Price ($)")
+      .style("font-family", "Arial");
 
-  svg.append("text")
-    .attr("transform", "rotate(-90)")
-    .attr("y", 0 - margin.left)
-    .attr("x", 0 - (height / 2))
-    .attr("dy", "1em")
-    .style("text-anchor", "middle")
-    .text("Ranking (Points)")
-    .style("font-family", "Arial");
+    svg.append("text")
+      .attr("transform", "rotate(-90)")
+      .attr("y", 0 - margin.left)
+      .attr("x", 0 - (height / 2))
+      .attr("dy", "1em")
+      .style("text-anchor", "middle")
+      .text("Ranking (Points)")
+      .style("font-family", "Arial");
 
-  svg.append("g")
-    .selectAll("dot")
-    .data(data)
-    .enter()
-    .append("circle")
-      .attr("cx", function (d) {
-          return x(d.price);
-      })
-      .attr("cy", function (d) {
-          return y(d.points); 
-      })
-      .attr("r", 8)
-      .style("fill", "#69b3a2")
-      .style("opacity", 0.3)
+    svg.append("g")
+      .selectAll("dot")
+      .data(data)
+      .enter()
+      .append("circle")
+        .attr("cx", function (d) {
+            return x(d.price);
+        })
+        .attr("cy", function (d) {
+            return y(d.points); 
+        })
+        .attr("r", 8)
+        .style("fill", "#69b3a2")
+        .style("opacity", 0.3)
     
-  svg.append("g")
-    .attr("class", "annotation-group")
-    .style("font-size", "10px")
-    .call(makeAnnotations);
+    svg.append("g")
+      .attr("class", "annotation-group")
+      .style("font-size", "10px")
+      .call(makeAnnotations);
     
-    }
- );
+      }
+  );
 
-</script>
+  </script>
 
-</body>
+  </body>
 </html>
