@@ -84,6 +84,27 @@ var svg = d3.select("#theus")
   svg.append("g")
     .call(d3.axisLeft(y));
   
+  const annotations = [
+   {
+    note: {
+    label: "Variety: Cabernet Sauvignon",
+    title: "Most expensive wine in the US",
+    wrap: 150,
+    align: "right"
+   },
+    connector: {
+      end: "arrow"
+    },
+    color: ["red"],
+    x: x(200),
+    y: y(95),
+    dy: x(200),
+    dx: y(95)
+   }
+ ]
+
+ const makeAnnotations = d3.annotation().type(d3.annotationLabel).annotations(annotations)
+  
   svg.append("text")
     .attr("transform", "translate(" + (width / 2) + " ," + (height + (margin.bottom - 2)) + ")")  
     .style("text-anchor", "middle")
@@ -137,6 +158,11 @@ var svg = d3.select("#theus")
             tooltip
             .style("opacity", 0)
       })
+  
+   svg.append("g")
+    .attr("class", "annotation-group")
+    .style("font-size", "10px")
+    .call(makeAnnotations);
     }
  );
 
