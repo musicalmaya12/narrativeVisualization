@@ -75,6 +75,11 @@ var margin = {top: 10, right: 30, bottom: 40, left: 60},
       .style("left", (d3.mouse(this)[0]) + "px")
       .style("top", (d3.mouse(this)[1]) + "px")
   }
+  
+  var mouseleave = function(d) {
+    tooltip
+      .style("opacity", 0)
+  }
 
 var svg = d3.select("#france")
   .append("svg")
@@ -132,6 +137,7 @@ var svg = d3.select("#france")
       .style("opacity", 0.5)
       .on("mouseover", mouseover )
       .on("mousemove", mousemove )
+      .on("mouseleave", mouseleave )
     }
  );
 
