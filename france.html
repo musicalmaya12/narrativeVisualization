@@ -60,6 +60,7 @@ var margin = {top: 10, right: 30, bottom: 40, left: 60},
     .style("opacity", 0)
     .attr("class", "tooltip")
     .style("background-color", "white")
+    .style("color", "red")
 
   var mouseover = function(d) {
     tooltip
@@ -69,8 +70,6 @@ var margin = {top: 10, right: 30, bottom: 40, left: 60},
   var mousemove = function(d) {
     tooltip
       .html(d.variety)
-      .style("left", d3.mouse(this)[0])
-      .style("top", d3.mouse(this)[1])
   }
   
   var mouseleave = function(d) {
