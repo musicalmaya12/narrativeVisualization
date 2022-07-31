@@ -103,9 +103,7 @@ var svg = d3.select("#main-viz")
     .enter()
     .append("circle")
       .attr("cx", function (d) {
-        if (d.price!=="0") {
-          return x(d.price); 
-        }
+          return x(d.price);
       })
       .attr("cy", function (d) {
           return y(d.points); 
