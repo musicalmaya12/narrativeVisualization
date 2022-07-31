@@ -25,28 +25,6 @@ body {
   background-color: red;
   color: white;
 }
-.annotation path {
-  stroke: blue;
-  fill: none;
-}
-
-.annotation path.connector-arrow, 
-  .title text, .annotation text,
-  .annotation.callout.circle .annotation-subject path{
-  fill: black;
-}
-
-.annotation-note-bg {
-  fill: rgba(255, 255, 255, 0);
-}
-  
-.annotation-note-title {
-  font-weight: bold;
-}
-
-.annotation.xythreshold {
-   cursor: move;
-}
   
 h1 {text-align: center;}
 </style>
@@ -77,14 +55,14 @@ h1 {text-align: center;}
 <script src="https://rawgit.com/susielu/d3-annotation/master/d3-annotation.min.js"></script>
 <script>
 
-d3.csv("wine-data.csv", 
-   function(data) {
+  d3.csv("wine-data.csv", 
+     function(data) {
   
-var margin = {top: 10, right: 30, bottom: 40, left: 60},
+  var margin = {top: 10, right: 30, bottom: 40, left: 60},
     width = 460 - margin.left - margin.right,
     height = 400 - margin.top - margin.bottom;
 
-var svg = d3.select("#main-viz")
+  var svg = d3.select("#main-viz")
   .append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
@@ -136,59 +114,27 @@ var svg = d3.select("#main-viz")
     }
  );
   
-  const labels = [
-     {
-       note: {
-       label: "Where the lowest ranked and cheapest wine originates",
-       title: "France",
-     },
-       dy: 82,
-       dx: 11,
-       data: {
-          x: 11,
-          y: 82,
-       },
-         subject: { radius: 5 },
-       },
-        {
-          note: {
-            label: "Where the highest ranked and most expensive wine originates",
-            title: "The United States",
-          },
-          dy: 95,
-          dx: 200,
-          data: {
-            x: 200,
-            y: 95,
-          },
-          subject: { radius: 5 },
-        },
-      ];
+  const annotations = [
+   {
+    note: {
+    label: "Hi.",
+    title: "Yo",
+    wrap: 30,
+    padding: 10,
+   },
+    color: ["red"],
+    x: 0,
+    y: 0,
+    dy: 30,
+    dx: 20
+   }
+ ]
 
-    const makeAnnotations = d3
-      .annotation()
-      .annotations(labels)
-      .type(d3.annotationCalloutCircle)
-      .accessors({
-        x: (d) => x(d.price),
-        y: (d) => y(d.points),
-      })
-      .on("subjectover", function (annotation) {
-        annotation.type.a
-          .selectAll("g.annotation-connector, g.annotation-note")
-          .classed("hidden", false);
-      })
-      .on("subjectout", function (annotation) {
-        annotation.type.a
-          .selectAll("g.annotation-connector, g.annotation-note")
-          .classed("hidden", true);
-      });
+ const makeAnnotations = d3.annotation().annotations(annotations)
 
-      svg.append("g").attr("class", "annotation-test").call(makeAnnotations);
-
-      svg
-        .selectAll("g.annotation-connector, g.annotation-note")
-        .classed("hidden", true);
+ svg.append("g")
+ .attr("class", "annotation-group")
+ .call(makeAnnotations)
 
 </script>
 
