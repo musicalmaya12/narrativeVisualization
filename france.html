@@ -102,7 +102,7 @@ var svg = d3.select("#france")
         }
       })
       .attr("cy", function (d) {
-        if (d.country==="France") {
+        if (d.country==="France" && d.points!==100) {
           return y(d.points); 
         }
       })
