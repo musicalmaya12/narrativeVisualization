@@ -47,6 +47,7 @@ h1 {text-align: center;}
 </div>
   
 <script src="https://d3js.org/d3.v4.min.js"></script>
+<script src="https://rawgit.com/susielu/d3-annotation/master/d3-annotation.min.js"></script>
 <script>
 
 d3.csv("wine-magazine-data.csv", 
@@ -84,6 +85,27 @@ var svg = d3.select("#italy")
     .range([ height, 0]);
   svg.append("g")
     .call(d3.axisLeft(y));
+  
+  const annotations = [
+   {
+    note: {
+    label: "Variety: Nebbiolo",
+    title: "Most expensive wine in Italy",
+    wrap: 150,
+    align: "right"
+   },
+    connector: {
+      end: "arrow"
+    },
+    color: ["red"],
+    x: x(150),
+    y: y(97),
+    dy: x(150),
+    dx: y(97)
+   }
+ ]
+
+ const makeAnnotations = d3.annotation().type(d3.annotationLabel).annotations(annotations)
   
   svg.append("text")
     .attr("transform", "translate(" + (width / 2) + " ," + (height + (margin.bottom - 2)) + ")")  
@@ -136,6 +158,11 @@ var svg = d3.select("#italy")
             tooltip
             .style("opacity", 0)
       })
+  
+   svg.append("g")
+    .attr("class", "annotation-group")
+    .style("font-size", "10px")
+    .call(makeAnnotations);
     }
  );
 
