@@ -46,6 +46,7 @@ h1 {text-align: center;}
 </div>
 
 <script src="https://d3js.org/d3.v4.min.js"></script>
+<script src="https://rawgit.com/susielu/d3-annotation/master/d3-annotation.min.js"></script>
 <script>
 
 d3.csv("wine-magazine-data.csv", 
@@ -83,6 +84,43 @@ var svg = d3.select("#france")
     .range([ height, 0]);
   svg.append("g")
     .call(d3.axisLeft(y));
+  
+  const annotations = [
+   {
+    note: {
+    label: "Variety: Chardonnay",
+    title: "Highest ranked wine in France",
+    wrap: 150,
+    align: "right"
+   },
+    connector: {
+      end: "arrow"
+    },
+    color: ["red"],
+    x: x(110),
+    y: y(95),
+    dy: x(110),
+    dx: y(105)
+   },
+  {
+    note: {
+    label: "Variety: Chardonnay",
+    title: "Most expensive wine in France",
+    wrap: 150,
+    align: "right"
+   },
+    connector: {
+      end: "arrow"
+    },
+    color: ["red"],
+    x: x(117),
+    y: y(0),
+    dy: 220,
+    dx: 80
+   }
+ ]
+
+ const makeAnnotations = d3.annotation().type(d3.annotationLabel).annotations(annotations)
   
   svg.append("text")
     .attr("transform", "translate(" + (width / 2) + " ," + (height + (margin.bottom - 2)) + ")")  
@@ -135,6 +173,11 @@ var svg = d3.select("#france")
             tooltip
             .style("opacity", 0)
       })
+  
+  svg.append("g")
+    .attr("class", "annotation-group")
+    .style("font-size", "10px")
+    .call(makeAnnotations);
     }
  );
 
