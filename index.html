@@ -61,27 +61,6 @@ h1 {text-align: center;}
   var margin = {top: 10, right: 30, bottom: 40, left: 60},
     width = 460 - margin.left - margin.right,
     height = 400 - margin.top - margin.bottom;
-    
-  const annotations = [
-   {
-    note: {
-    label: "Cheapest and lowest ranked wine",
-    title: "France",
-    align: "left"
-   },
-    connector: {
-      type: "curve",
-      end: "arrow"
-    },
-    color: ["red"],
-    x: 12,
-    y: 210,
-    dy: 210,
-    dx: 12
-   }
- ]
-
- const makeAnnotations = d3.annotation().type(d3.annotationLabel).annotations(annotations)
 
   var svg = d3.select("#main-viz")
   .append("svg")
@@ -103,6 +82,26 @@ h1 {text-align: center;}
     .range([ height, 0]);
   svg.append("g")
     .call(d3.axisLeft(y));
+    
+   const annotations = [
+   {
+    note: {
+    label: "Most expensive wine",
+    title: "The United States",
+    align: "left"
+   },
+    connector: {
+      end: "arrow"
+    },
+    color: ["red"],
+    x: x(200),
+    y: y(95),
+    dy: x(200),
+    dx: y(95)
+   }
+ ]
+
+ const makeAnnotations = d3.annotation().type(d3.annotationLabel).annotations(annotations)
   
   svg.append("text")
     .attr("transform", "translate(" + (width / 2) + " ," + (height + (margin.bottom - 2)) + ")")  
