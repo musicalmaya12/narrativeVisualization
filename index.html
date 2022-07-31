@@ -83,9 +83,7 @@ h1 {text-align: center;}
     .attr("height", height + margin.top + margin.bottom)
   .append("g")
     .attr("transform",
-          "translate(" + margin.left + "," + margin.top + ")")
-    .attr("class", "annotation-group")
-    .call(makeAnnotations);
+          "translate(" + margin.left + "," + margin.top + ")");
 
   var x = d3.scaleLinear()
     .domain([0, 250])
@@ -128,6 +126,11 @@ h1 {text-align: center;}
       })
       .attr("r", 3)
       .style("fill", "#69b3a2")
+    
+  svg.append("g")
+    .attr("class", "annotation-group")
+    .call(makeAnnotations);
+    
     }
  );
 
