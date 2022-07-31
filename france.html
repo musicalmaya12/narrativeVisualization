@@ -127,7 +127,7 @@ var svg = d3.select("#france")
       .on("mousemove", function(d) {
           tooltip
           .html(d, function(d) {
-            return d.variety + " " + d.points;
+             return 'Variety' + '<br/>' + d.variety;
           })
       })
       .on("mouseleave", function(d) {
