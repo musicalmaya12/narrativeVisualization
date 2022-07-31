@@ -82,6 +82,27 @@ h1 {text-align: center;}
     .range([ height, 0]);
   svg.append("g")
     .call(d3.axisLeft(y));
+    
+  const annotations = [
+   {
+    note: {
+    label: "Hi.",
+    title: "Yo",
+   },
+    color: ["red"],
+    x: 0,
+    y: 0,
+    dy: 30,
+    dx: 20
+   }
+ ]
+
+ const makeAnnotations = d3.annotation().annotations(annotations)
+
+ svg.append("g")
+ .selectAll("dot")
+ .attr("class", "annotation-group")
+ .call(makeAnnotations)
   
   svg.append("text")
     .attr("transform", "translate(" + (width / 2) + " ," + (height + (margin.bottom - 2)) + ")")  
@@ -98,7 +119,7 @@ h1 {text-align: center;}
     .text("Ranking (Points)")
     .style("font-family", "Arial");
 
-  svg.append('g')
+  svg.append("g")
     .selectAll("dot")
     .data(data)
     .enter()
@@ -113,28 +134,6 @@ h1 {text-align: center;}
       .style("fill", "#69b3a2")
     }
  );
-  
-  const annotations = [
-   {
-    note: {
-    label: "Hi.",
-    title: "Yo",
-    wrap: 30,
-    padding: 10,
-   },
-    color: ["red"],
-    x: 0,
-    y: 0,
-    dy: 30,
-    dx: 20
-   }
- ]
-
- const makeAnnotations = d3.annotation().annotations(annotations)
-
- svg.append("g")
- .attr("class", "annotation-group")
- .call(makeAnnotations)
 
 </script>
 
