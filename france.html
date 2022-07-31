@@ -131,12 +131,13 @@ var svg = d3.select("#france")
         }
       })
       .attr("cy", function (d) {
-        if (d.country==="France" && d.points!==100) {
+        if (d.country==="France") {
           return y(d.points); 
         }
       })
-      .attr("r", 7)
+      .attr("r", 5)
       .style("fill", "#69b3a2")
+      .style("opacity", 0.5)
       .on("mouseover", mouseover )
       .on("mousemove", mousemove )
       .on("mouseleave", mouseleave )
