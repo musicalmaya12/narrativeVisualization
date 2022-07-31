@@ -32,7 +32,7 @@ h1 {text-align: center;}
  
 <div align="center">
 <h1>France</h1>
-<p>Mouse over the dots to view the types of wines ranked!</p>
+<p>Mouse over the dots to view details on each wine ranked!</p>
 <div id="france"></div>
 <div class="pagination">
   <a href="italy.html">&laquo;</a>
@@ -126,7 +126,7 @@ var svg = d3.select("#france")
       })
       .on("mousemove", function(d) {
           tooltip
-          .html(d.variety)
+          .html(<p>(d.variety)</br>(d.price)</br>(d.points)</p>)
       })
       .on("mouseleave", function(d) {
           d3.select(this).transition()
