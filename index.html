@@ -60,6 +60,16 @@ d3.csv("wine-data.csv",
 var margin = {top: 10, right: 30, bottom: 40, left: 60},
     width = 460 - margin.left - margin.right,
     height = 400 - margin.top - margin.bottom;
+  
+var tooltip = d3.select("#main-viz")
+    .append("div")
+    .style("opacity", 0)
+    .attr("class", "tooltip")
+    .style("background-color", "white")
+    .style("border", "solid")
+    .style("border-width", "1px")
+    .style("border-radius", "5px")
+    .style("padding", "10px")
 
 var svg = d3.select("#main-viz")
   .append("svg")
