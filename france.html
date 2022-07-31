@@ -72,7 +72,7 @@ var margin = {top: 10, right: 30, bottom: 40, left: 60},
 
   var mousemove = function(d) {
     tooltip
-      .html(d.designation)
+      .html(d.variety)
       .style("left", (d3.mouse(this)[0]+90) + "px")
       .style("top", (d3.mouse(this)[1]) + "px")
   }
@@ -135,7 +135,7 @@ var svg = d3.select("#france")
           return y(d.points); 
         }
       })
-      .attr("r", 3)
+      .attr("r", 7)
       .style("fill", "#69b3a2")
       .on("mouseover", mouseover )
       .on("mousemove", mousemove )
