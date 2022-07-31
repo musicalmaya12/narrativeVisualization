@@ -86,21 +86,19 @@ h1 {text-align: center;}
   const annotations = [
    {
     note: {
-    label: "Hi.",
+    label: "Hi",
     title: "Yo",
    },
-    color: ["red"],
-    x: 0,
-    y: 0,
-    dy: 30,
-    dx: 20
+    x: 11,
+    y: 82,
+    dy: 90,
+    dx: 15
    }
  ]
 
- const makeAnnotations = d3.annotation().annotations(annotations)
+ const makeAnnotations = d3.annotation().type(d3.annotationLabel).annotations(annotations)
 
- svg.append("g")
- .selectAll("dot")
+ d3.select("#main-viz").append("g")
  .attr("class", "annotation-group")
  .call(makeAnnotations)
   
