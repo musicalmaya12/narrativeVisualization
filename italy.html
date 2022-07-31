@@ -163,7 +163,14 @@ var svg = d3.select("#italy")
     .attr("class", "annotation-group")
     .style("font-size", "10px")
     .call(makeAnnotations);
-    }
+   
+   svg.append("line")
+    .attr('x1',x(10))
+    .attr('x2',x(20))
+    .attr('y1',y(5))
+    .attr('y2',y(10))
+  
+   }
  );
 
 </script>
