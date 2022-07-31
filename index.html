@@ -142,8 +142,8 @@ var svg = d3.select("#main-viz")
        label: "Where the lowest ranked and cheapest wine originates",
        title: "France",
      },
-       dy: 20,
-       dx: 90,
+       dy: 82,
+       dx: 11,
        data: {
           x: 11,
           y: 82,
@@ -155,8 +155,8 @@ var svg = d3.select("#main-viz")
             label: "Where the highest ranked and most expensive wine originates",
             title: "The United States",
           },
-          dy: 100,
-          dx: 210,
+          dy: 95,
+          dx: 200,
           data: {
             x: 200,
             y: 95,
@@ -170,8 +170,8 @@ var svg = d3.select("#main-viz")
       .annotations(labels)
       .type(d3.annotationCalloutCircle)
       .accessors({
-        x: (d) => x(d.x),
-        y: (d) => y(d.y),
+        x: (d) => x(d.price),
+        y: (d) => y(d.points),
       })
       .on("subjectover", function (annotation) {
         annotation.type.a
@@ -184,11 +184,11 @@ var svg = d3.select("#main-viz")
           .classed("hidden", true);
       });
 
-      svg.append('g').attr('class', 'annotation-test').call(makeAnnotations);
+      svg.append("g").attr("class", "annotation-test").call(makeAnnotations);
 
       svg
-        .selectAll('g.annotation-connector, g.annotation-note')
-        .classed('hidden', true);
+        .selectAll("g.annotation-connector, g.annotation-note")
+        .classed("hidden", true);
 
 </script>
 
