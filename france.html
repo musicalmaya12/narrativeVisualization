@@ -55,6 +55,35 @@ var margin = {top: 10, right: 30, bottom: 40, left: 60},
     width = 460 - margin.left - margin.right,
     height = 400 - margin.top - margin.bottom;
 
+ var tooltip = d3.select("#france")
+    .append("div")
+    .style("opacity", 0)
+    .attr("class", "tooltip")
+    .style("background-color", "white")
+    .style("border", "solid")
+    .style("border-width", "1px")
+    .style("border-radius", "5px")
+    .style("padding", "10px")
+
+  var mouseover = function(d) {
+    tooltip
+      .style("opacity", 1)
+  }
+
+  var mousemove = function(d) {
+    tooltip
+      .html(d.designation)
+      .style("left", (d3.mouse(this)[0]+90) + "px")
+      .style("top", (d3.mouse(this)[1]) + "px")
+  }
+  
+  var mouseleave = function(d) {
+    tooltip
+      .transition()
+      .duration(200)
+      .style("opacity", 0)
+  }
+
 var svg = d3.select("#france")
   .append("svg")
     .attr("width", width + margin.left + margin.right)
@@ -108,6 +137,9 @@ var svg = d3.select("#france")
       })
       .attr("r", 3)
       .style("fill", "#69b3a2")
+      .on("mouseover", mouseover )
+      .on("mousemove", mousemove )
+      .on("mouseleave", mouseleave )
     }
  );
 
