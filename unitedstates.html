@@ -32,7 +32,7 @@ h1 {text-align: center;}
  
 <div align="center">
 <h1>The United States</h1>
-
+<p>Mouse over the dots to view the variety of each ranked wine!</p>
 <div id="theus"></div>
 <div class="pagination">
   <a href="france.html">&laquo;</a>
@@ -54,6 +54,14 @@ d3.csv("wine-data.csv",
 var margin = {top: 10, right: 30, bottom: 40, left: 60},
     width = 460 - margin.left - margin.right,
     height = 400 - margin.top - margin.bottom;
+
+var tooltip = d3.select("#theus")
+    .append("div")
+    .style("opacity", 0)
+    .attr("class", "tooltip")
+    .style("background-color", "white")
+    .style("color", "red")
+    .style("font-weight", "bold")
 
 var svg = d3.select("#theus")
   .append("svg")
@@ -108,7 +116,25 @@ var svg = d3.select("#theus")
       })
       .attr("r", 7)
       .style("fill", "#69b3a2")
-      .style("opacity", 0.5)
+      .style("opacity", 0.3)
+      .on("mouseover", function(d) {
+         d3.select(this).transition()
+          .duration('10')
+          .attr("r", 12)
+          tooltip
+          .style("opacity", 1)
+      })
+      .on("mousemove", function(d) {
+          tooltip
+          .html(d.variety)
+      })
+      .on("mouseleave", function(d) {
+          d3.select(this).transition()
+            .duration('200')
+            .attr("r", 10);
+            tooltip
+            .style("opacity", 0)
+      })
     }
  );
 
