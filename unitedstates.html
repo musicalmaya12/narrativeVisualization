@@ -120,11 +120,6 @@ var svg = d3.select("#theus")
     .style("text-anchor", "middle")
     .text("Ranking (Points)")
     .style("font-family", "Arial");
-  
-  svg.append("g")
-    .attr("class", "annotation-group")
-    .style("font-size", "10px")
-    .call(makeAnnotations);
 
   svg.append('g')
     .selectAll("dot")
@@ -164,6 +159,11 @@ var svg = d3.select("#theus")
             tooltip
             .style("opacity", 0)
       })
+  
+   svg.append("g")
+    .attr("class", "annotation-group")
+    .style("font-size", "10px")
+    .call(makeAnnotations);
     }
   );
 
