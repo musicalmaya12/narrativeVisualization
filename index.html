@@ -25,6 +25,28 @@ body {
   background-color: red;
   color: white;
 }
+.annotation path {
+  stroke: blue;
+  fill: none;
+}
+
+.annotation path.connector-arrow, 
+  .title text, .annotation text,
+  .annotation.callout.circle .annotation-subject path{
+  fill: black;
+}
+
+.annotation-note-bg {
+  fill: rgba(255, 255, 255, 0);
+}
+  
+.annotation-note-title {
+  font-weight: bold;
+}
+
+.annotation.xythreshold {
+   cursor: move;
+}
   
 h1 {text-align: center;}
 </style>
@@ -52,6 +74,7 @@ h1 {text-align: center;}
 </div>
 
 <script src="https://d3js.org/d3.v4.min.js"></script>
+<script src="https://rawgit.com/susielu/d3-annotation/master/d3-annotation.min.js"></script>
 <script>
 
 d3.csv("wine-data.csv", 
@@ -60,16 +83,6 @@ d3.csv("wine-data.csv",
 var margin = {top: 10, right: 30, bottom: 40, left: 60},
     width = 460 - margin.left - margin.right,
     height = 400 - margin.top - margin.bottom;
-  
-var tooltip = d3.select("#main-viz")
-    .append("div")
-    .style("opacity", 0)
-    .attr("class", "tooltip")
-    .style("background-color", "white")
-    .style("border", "solid")
-    .style("border-width", "1px")
-    .style("border-radius", "5px")
-    .style("padding", "10px")
 
 var svg = d3.select("#main-viz")
   .append("svg")
@@ -91,25 +104,6 @@ var svg = d3.select("#main-viz")
     .range([ height, 0]);
   svg.append("g")
     .call(d3.axisLeft(y));
-  
-  var mouseover = function(d) {
-    tooltip
-      .style("opacity", 1)
-  }
-  
-  var mousemove = function(d) {
-    tooltip
-      .html("Wine country of origin<br>: " + d.country)
-      .style("left", (d3.mouse(this)[0]+90) + "px")
-      .style("top", (d3.mouse(this)[1]) + "px")
-  }
-
-  var mouseleave = function(d) {
-    tooltip
-      .transition()
-      .duration(200)
-      .style("opacity", 0)
-  }
   
   svg.append("text")
     .attr("transform", "translate(" + (width / 2) + " ," + (height + (margin.bottom - 2)) + ")")  
@@ -139,11 +133,62 @@ var svg = d3.select("#main-viz")
       })
       .attr("r", 3)
       .style("fill", "#69b3a2")
-      .on("mouseover", mouseover )
-      .on("mousemove", mousemove )
-      .on("mouseleave", mouseleave )
     }
  );
+  
+  const labels = [
+     {
+       note: {
+       label: "Where the lowest ranked and cheapest wine originates",
+       title: "France",
+     },
+       dy: 20,
+       dx: 90,
+       data: {
+          x: 11,
+          y: 82,
+       },
+         subject: { radius: 5 },
+       },
+        {
+          note: {
+            label: "Where the highest ranked and most expensive wine originates",
+            title: "The United States",
+          },
+          dy: 100,
+          dx: 210,
+          data: {
+            x: 200,
+            y: 95,
+          },
+          subject: { radius: 5 },
+        },
+      ];
+
+    const makeAnnotations = d3
+      .annotation()
+      .annotations(labels)
+      .type(d3.annotationCalloutCircle)
+      .accessors({
+        x: (d) => x(d.x),
+        y: (d) => y(d.y),
+      })
+      .on("subjectover", function (annotation) {
+        annotation.type.a
+          .selectAll("g.annotation-connector, g.annotation-note")
+          .classed("hidden", false);
+      })
+      .on("subjectout", function (annotation) {
+        annotation.type.a
+          .selectAll("g.annotation-connector, g.annotation-note")
+          .classed("hidden", true);
+      });
+
+      svg.append('g').attr('class', 'annotation-test').call(makeAnnotations);
+
+      svg
+        .selectAll('g.annotation-connector, g.annotation-note')
+        .classed('hidden', true);
 
 </script>
 
